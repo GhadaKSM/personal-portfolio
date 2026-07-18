@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>غادة المطيري | مهندسة حاسب</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0d1117;
+    --bg-panel: #131a24;
+    --line: #223047;
+    --text: #e7ecf2;
+    --muted: #8b98ab;
+    --accent: #34e2b0;
+    --accent-dim: #1c8f6d;
+    --gold: #f2b950;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Tajawal', sans-serif;
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  .mono{font-family:'JetBrains Mono', monospace;}
+
+  /* subtle circuit background */
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background-image:
+      linear-gradient(var(--line) 1px, transparent 1px),
+      linear-gradient(90deg, var(--line) 1px, transparent 1px);
+    background-size:56px 56px;
+    opacity:.12;
+    z-index:0;
+    pointer-events:none;
+  }
+
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(13,17,23,.85);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    max-width:1000px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 24px;
+  }
+  .logo{font-family:'JetBrains Mono',monospace; font-weight:600; color:var(--accent); font-size:18px; letter-spacing:.5px;}
+  .logo span{color:var(--muted);}
+  nav ul{list-style:none; display:flex; gap:28px;}
+  nav a{color:var(--muted); text-decoration:none; font-size:15px; transition:color .2s;}
+  nav a:hover{color:var(--accent);}
+
+  section{position:relative; z-index:1; max-width:1000px; margin:0 auto; padding:100px 24px;}
+
+  /* HERO */
+  .hero{
+    min-height:88vh; display:flex; flex-direction:column; justify-content:center;
+    padding-top:60px;
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace; color:var(--accent);
+    font-size:14px; margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:"//"; color:var(--accent-dim);}
+  .hero h1{
+    font-size:clamp(42px,7vw,74px); font-weight:900; line-height:1.15;
+    margin-bottom:18px;
+  }
+  .hero h1 .hl{color:var(--accent);}
+  .hero p.role{
+    font-size:20px; color:var(--muted); max-width:600px; margin-bottom:34px;
+  }
+  .hero p.role b{color:var(--gold); font-weight:700;}
+  .btn-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn{
+    font-family:'Tajawal',sans-serif; font-weight:700; font-size:15px;
+    padding:14px 28px; border-radius:6px; text-decoration:none;
+    transition:transform .15s ease, box-shadow .15s ease;
+    display:inline-block;
+  }
+  .btn-primary{background:var(--accent); color:#04140f;}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 10px 24px -8px rgba(52,226,176,.5);}
+  .btn-outline{border:1px solid var(--line); color:var(--text);}
+  .btn-outline:hover{border-color:var(--accent); color:var(--accent);}
+
+  .terminal{
+    margin-top:56px; background:var(--bg-panel); border:1px solid var(--line);
+    border-radius:10px; overflow:hidden; max-width:560px;
+  }
+  .terminal-bar{
+    display:flex; gap:8px; padding:12px 16px; border-bottom:1px solid var(--line);
+  }
+  .dot{width:11px; height:11px; border-radius:50%;}
+  .dot.r{background:#ff5f56;} .dot.y{background:#ffbd2e;} .dot.g{background:#27c93f;}
+  .terminal pre{
+    padding:20px; font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--muted);
+    direction:ltr; text-align:left;
+  }
+  .terminal .k{color:var(--accent);}
+  .terminal .s{color:var(--gold);}
+
+  /* SECTION HEADS */
+  .sec-head{display:flex; align-items:baseline; gap:14px; margin-bottom:44px;}
+  .sec-num{font-family:'JetBrains Mono',monospace; color:var(--accent-dim); font-size:15px;}
+  .sec-head h2{font-size:30px; font-weight:700;}
+  .sec-head .rule{flex:1; height:1px; background:var(--line);}
+
+  /* ABOUT */
+  .about-single{max-width:760px;}
+  .about-single p{color:#c4cddb; margin-bottom:16px; font-size:16px;}
+
+  /* EDUCATION */
+  .edu-card{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:10px;
+    padding:28px 30px; position:relative; border-right:3px solid var(--accent);
+  }
+  .edu-card h3{font-size:20px; margin-bottom:6px;}
+  .edu-card .tag{
+    font-family:'JetBrains Mono',monospace; font-size:12.5px; color:var(--gold);
+    background:rgba(242,185,80,.1); padding:4px 10px; border-radius:20px; display:inline-block; margin-bottom:14px;
+  }
+  .edu-card p{color:var(--muted); font-size:15px;}
+
+  /* SKILLS */
+  .skills-wrap{display:flex; flex-direction:column; gap:22px;}
+  .skill-row{display:grid; grid-template-columns:150px 1fr; align-items:center; gap:18px;}
+  .skill-row .name{font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--text);}
+  .bar{height:8px; background:var(--bg-panel); border:1px solid var(--line); border-radius:20px; overflow:hidden;}
+  .bar i{
+    display:block; height:100%; background:linear-gradient(90deg,var(--accent-dim),var(--accent));
+    border-radius:20px;
+  }
+
+  /* CONTACT */
+  .contact-box{
+    background:var(--bg-panel); border:1px solid var(--line); border-radius:14px;
+    padding:50px 40px; text-align:center;
+  }
+  .contact-box h2{font-size:30px; margin-bottom:12px;}
+  .contact-box p{color:var(--muted); margin-bottom:30px;}
+  .links{display:flex; justify-content:center; gap:16px; flex-wrap:wrap;}
+  .link-chip{
+    font-family:'JetBrains Mono',monospace; font-size:14px; color:var(--text);
+    border:1px solid var(--line); padding:11px 20px; border-radius:8px; text-decoration:none;
+    transition:.2s;
+  }
+  .link-chip:hover{border-color:var(--accent); color:var(--accent); transform:translateY(-2px);}
+
+  footer{
+    text-align:center; padding:32px; color:var(--muted); font-size:13px;
+    border-top:1px solid var(--line); font-family:'JetBrains Mono',monospace;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Ghada<span>.dev</span></div>
+    <ul>
+      <li><a href="#about">نبذة</a></li>
+      <li><a href="#education">الدراسة</a></li>
+      <li><a href="#skills">المهارات</a></li>
+      <li><a href="#contact">تواصل</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero" id="home">
+  <div class="eyebrow mono">welcome to my portfolio</div>
+  <h1>أنا غادة المطيري<br><span class="hl">مهندسة حاسب</span> قيد التكوّن</h1>
+  <p class="role">طالبة <b>هندسة الحاسب</b> في جامعة القصيم، وعلى أعتاب السنة الأخيرة من رحلتي الدراسية 🎓</p>
+  <div class="btn-row">
+    <a href="#contact" class="btn btn-primary">تواصل معي</a>
+    <a href="#education" class="btn btn-outline">تعرّف على مسيرتي</a>
+  </div>
+
+  <div class="terminal">
+    <div class="terminal-bar"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+    <pre><span class="k">const</span> student = {
+  name: <span class="s">"Ghada Al-Mutairi"</span>,
+  age: 21,
+  major: <span class="s">"Computer Engineering"</span>,
+  university: <span class="s">"Qassim University"</span>,
+  year: <span class="s">"Final Year"</span>,
+  status: <span class="s">"building the future 🚀"</span>
+};</pre>
+  </div>
+</section>
+
+<section id="about">
+  <div class="sec-head">
+    <span class="sec-num mono">01</span>
+    <h2>نبذة عني</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="about-single">
+    <p>مرحبًا! اسمي غادة المطيري، عمري 21 عامًا، وأدرس تخصص <b>هندسة الحاسب</b> في جامعة القصيم. أنا حاليًا في سنتي الدراسية الأخيرة، وأستعد لدخول سوق العمل بعد رحلة تعلّم شملت الأنظمة المدمجة، والشبكات، وهندسة الأنظمة، والبرمجة بلغة Python.</p>
+    <p>أؤمن بأن الهندسة ليست فقط عن الأكواد والدوائر، بل عن حل المشكلات بطريقة مبتكرة ومسؤولة. أسعى دائمًا لتطوير مهاراتي التقنية وبناء مشاريع تعكس شغفي بهذا المجال.</p>
+  </div>
+</section>
+
+<section id="education">
+  <div class="sec-head">
+    <span class="sec-num mono">02</span>
+    <h2>المسيرة الدراسية</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="edu-card">
+    <span class="tag mono">2022 — 2026</span>
+    <h3>بكالوريوس هندسة الحاسب</h3>
+    <p>جامعة القصيم — السنة الدراسية الأخيرة. تركز دراستي على الأنظمة المدمجة (Embedded Systems)، الشبكات، هندسة الأنظمة، والبرمجة بلغة Python.</p>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="sec-head">
+    <span class="sec-num mono">03</span>
+    <h2>المهارات</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="skills-wrap">
+    <div class="skill-row"><span class="name">Python</span><div class="bar"><i style="width:85%"></i></div></div>
+    <div class="skill-row"><span class="name">Embedded Systems</span><div class="bar"><i style="width:75%"></i></div></div>
+    <div class="skill-row"><span class="name">Networking</span><div class="bar"><i style="width:70%"></i></div></div>
+    <div class="skill-row"><span class="name">Systems Engineering</span><div class="bar"><i style="width:72%"></i></div></div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="sec-head">
+    <span class="sec-num mono">04</span>
+    <h2>تواصل معي</h2>
+    <div class="rule"></div>
+  </div>
+  <div class="contact-box">
+    <h2>لنبنِ شيئًا رائعًا معًا</h2>
+    <p>أنا منفتحة دائمًا على فرص التعلّم والتعاون في المشاريع الهندسية والتقنية.</p>
+  </div>
+</section>
+
+<footer class="mono">© 2026 Ghada Al-Mutairi — Computer Engineering Student, Qassim University</footer>
+
+</body>
+</html>
