@@ -10,5 +10,5 @@ A simple personal portfolio website showcasing information about me
 - Contact
 
 ## Built With
-- HTML5
+- HTML
 - CSS3
